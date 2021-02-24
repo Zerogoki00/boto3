@@ -3,11 +3,11 @@
 
 Name:           python-%{pkgname}
 Version:        1.17.14
-Release:        CROC1%{?buildid}%{?dist}
+Release:        CROC1TEST%{?buildid}%{?dist}
 Summary:        The AWS SDK for Python
 
 License:        ASL 2.0
-URL:            https://github.com/boto/boto3
+URL:            https://github.com/C2Devel/boto3.git
 Source0:        https://pypi.io/packages/source/b/boto3/boto3-%{version}.tar.gz
 BuildArch:      noarch
 
@@ -18,10 +18,14 @@ write software that makes use of services like Amazon S3
 and Amazon EC2.
 
 %package -n     python%{python3_pkgversion}-%{pkgname}
+Requires:       python%{python3_pkgversion}-botocore >= 1.20.14
+Requires:       python%{python3_pkgversion}-jmespath >= 0.7.1
+Requires:       python%{python3_pkgversion}-s3transfer >= 0.3.0
+
 Summary:        The AWS SDK for Python
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{pkgname}}
+Provides:       python%{python3_pkgversion}-%{pkgname}
 
 %description -n python%{python3_pkgversion}-%{pkgname}
 Boto3 is the Amazon Web Services (AWS) Software Development
