@@ -1,8 +1,9 @@
-%global pypi_name boto3
+%global pkgname boto3
+%define buildid @BUILDID@
 
-Name:           python-%{pypi_name}
-Version:        1.17.4
-Release:        CROC1%{?dist}
+Name:           python-%{pkgname}
+Version:        1.17.14
+Release:        CROC1%{?buildid}%{?dist}
 Summary:        The AWS SDK for Python
 
 License:        ASL 2.0
@@ -16,21 +17,21 @@ Kit (SDK) for Python, which allows Python developers to
 write software that makes use of services like Amazon S3
 and Amazon EC2.
 
-%package -n     python3-%{pypi_name}
+%package -n     python%{python3_pkgversion}-%{pkgname}
 Summary:        The AWS SDK for Python
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
-%{?python_provide:%python_provide python3-%{pypi_name}}
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-setuptools
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pkgname}}
 
-%description -n python3-%{pypi_name}
+%description -n python%{python3_pkgversion}-%{pkgname}
 Boto3 is the Amazon Web Services (AWS) Software Development
 Kit (SDK) for Python, which allows Python developers to
 write software that makes use of services like Amazon S3
 and Amazon EC2.
 
 %prep
-%setup -q -n %{pypi_name}-%{version}
-rm -rf %{pypi_name}.egg-info
+%setup -q -n %{pkgname}-%{version}
+rm -rf %{pkgname}.egg-info
 # Remove online tests
 rm -rf tests/integration
 
@@ -40,11 +41,12 @@ rm -rf tests/integration
 %install
 %py3_install
 
-%files -n python3-%{pypi_name}
+%files -n python%{python3_pkgversion}-%{pkgname}
+%defattr(-,root,root,-)
 %doc README.rst
 %license LICENSE
-%{python3_sitelib}/%{pypi_name}/
-%{python3_sitelib}/%{pypi_name}-%{version}-*.egg-info/
+%{python3_sitelib}/%{pkgname}
+%{python3_sitelib}/%{pkgname}-%{version}-*.egg-info
 
 %changelog
 * Wed Feb 24 2021 Alexander Chernev <achernev@croc.ru> - 1.17.14-CROC1
