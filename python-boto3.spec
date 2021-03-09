@@ -3,7 +3,7 @@
 
 Name:           python-%{pkgname}
 Version:        1.17.14
-Release:        CROC1TEST%{?buildid}%{?dist}
+Release:        CROC2TEST%{?buildid}%{?dist}
 Summary:        The AWS SDK for Python
 
 License:        ASL 2.0
